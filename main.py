@@ -32,6 +32,7 @@ class User(db.Model):
         self.username = username
         self.password = password
 
+
 @app.before_request
 def require_login():
     allowed_routes = ['login', 'display_mainblog', 'index', 'signup']
@@ -142,6 +143,7 @@ def display_mainblog():
     #if user clicks on blog, redirect to individual blog page
     #query db for the blog entry
 
+    """
     try:
         request.args['id']
     except:
@@ -150,21 +152,24 @@ def display_mainblog():
         blog_id = request.args['id']
         blog = Blog.query.get(blog_id)
         return render_template('individualblog.html', blogname=blog.title, blogentry=blog.body)
+    """
 
-    #if request.args['id']:
-    #    blog_id = request.args.get('id')
-    #    blog = Blog.query.get(blog_id)
+    if 'id' in request.args:
+        blog_id = request.args.get('id')
+        blog = Blog.query.get(blog_id)
             
-    #    return render_template('individualblog.html', blogname=blog.title, blogentry=blog.body)
+        return render_template('individualblog.html', blogname=blog.title, blogentry=blog.body)
 
-    """    
-    if request.args['user']:
+
+      
+    if 'user' in request.args:
         user_id = request.args.get('user')
         user = User.query.get(user_id)
         #userblogs = Blog.query.filter_by(owner_id=user_id).all()     
         return render_template('singleUser.html', user=user)
-    """    
+       
 
+    """    
     try:
         request.args['user']
     except:
@@ -174,7 +179,7 @@ def display_mainblog():
         user = User.query.get(user_id)
         #userblogs = Blog.query.filter_by(owner_id=user_id).all()     
         return render_template('singleUser.html', user=user)
-
+    """
 
     blogs = Blog.query.all()
     return render_template('mainblog.html', blogs=blogs)
@@ -198,8 +203,8 @@ def new_post():
     blogname = request.form['title']
     blogentry = request.form['body']
     #blogowner = # take username from session here to get ID from db then thats the blogowner ID
-    #blogowner = Blog.query.filter_by(username=session['username']).first()
-    blogowner = Blog.query.filter_by(owner_id=user_id).first()
+    blogowner = User.query.filter_by(username=session['username']).first()
+    #blogowner = User.query.filter_by(owner_id=user_id).first()
 
     new_blog = Blog(blogname, blogentry, blogowner)
     db.session.add(new_blog)
