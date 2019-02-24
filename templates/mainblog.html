@@ -1,6 +1,5 @@
 {% extends "base.html" %}
-<!doctype html>
-<html>
+
 {% block content %}
     <head>
         <h1>Main Blog Page</h1>
@@ -16,8 +15,12 @@
       <form action= "/blog", method='post'>
         <ul>
           {% for blog in blogs %}
-          <li><a href = "/blog?blogid=blog_id">{{blog.title}}</a></li> <!--enter blog-ID query parameter-->
-          <li>{{blog.body}}</li>
+          <li><a href = "/blog?id={{blog.id}}">{{blog.title}}</a></li> 
+          <!--
+          <li><a href = "/blog">{{blog.title}}</a></li>
+          -->
+          <p>{{blog.body}}</p>
+          <p>written by <a href = "/blog?user={{user.id}}">{{user.username}}</a></p>
           {% endfor %}
         </ul>
     </body>

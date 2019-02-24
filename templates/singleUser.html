@@ -1,0 +1,27 @@
+<!-- to display only the blogs associated with a single given author-->
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <h1>Blog Posts!</h1>
+    <style>
+        textarea {
+            margin: 10px 0;
+            width: 540px;
+            height: 120px;
+        }
+    </style>
+</head>
+<body> 
+  <form action= "/blog", method='get'>
+    <ul>
+      {% for blog in user.blogs %}
+      <!--?user=userId -->
+      <li><a href = "/blog?id={{blog.id}}">{{blog.title}}</a></li> 
+      <p>{{blog.body}}</p>
+      <p>written by <a href = "/blog?user={{user.id}}">{{user.username}}</a></p>
+      {% endfor %}
+    </ul>
+</body>
+{% endblock %} 
+
+

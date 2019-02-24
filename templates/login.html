@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+<!--User enters a username that is stored in the database with the correct password and is redirected to the /newpost page 
+with their username being stored in a session.
+User enters a username that is stored in the database with an incorrect password and is redirected to the /login page
+with a message that their password is incorrect.
+User tries to login with a username that is not stored in the database and is redirected to the /login page with a message
+that this username does not exist.
+User does not have an account and clicks "Create Account" and is directed to the /signup page.
+-->
+
+{% block content %}
+    <head>
+        <style>
+            form {
+                background-color: #eee;
+                padding: 20px;
+                margin: 0 auto;
+                width: 540px;
+                font: 16px sans-serif;
+                border-radius: 10px;
+            }
+            textarea {
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }
+        </style>
+   
+    </head>
+    <body>
+      <h1>Login</h1>
+      <form action="/login" method="post">
+        <label>
+            <h2>Username:</h2>
+            <input type="text" name="username">
+        </label>
+        <p class="error">{{usernameerror}}</p>
+        <br></br>
+        <label>
+            <h2>Password:</h2>
+            <input type="password" name="password">
+        </label>
+        <p class="error">{{passworderror}}</p>
+        <br></br>
+        <input type="submit" value="Login"/>
+        <p>Don't have an account? <a href="/signup">Create one!</a></p>
+      </form>
+    </body>
+{% endblock %}

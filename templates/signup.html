@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+<!--
+User enters new, valid username, a valid password, and verifies password correctly and is redirected to the '/newpost' 
+page with their username being stored in a session.
+User leaves any of the username, password, or verify fields blank and gets an error message that one or more fields 
+are invalid.
+User enters a username that already exists and gets an error message that username already exists.
+User enters different strings into the password and verify fields and gets an error message that the passwords do not match.
+User enters a password or username less than 3 characters long and gets either an invalid username or an invalid password message.
+-->
+
+
+{% block content %}
+    <head>
+        <style>
+            form {
+                background-color: #eee;
+                padding: 20px;
+                margin: 0 auto;
+                width: 540px;
+                font: 16px sans-serif;
+                border-radius: 10px;
+            }
+            textarea {
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }
+        </style>
+   
+    </head>
+    <body>
+      <h1>Signup</h1>
+      <!-- check required fields syntax-->
+      <form action="/signup" method="post">
+        <label>
+            <h2>Username:</h2>
+            <input type="text" name="username" required>
+        </label>
+        <p class="error">{{usernameerror}}</p>
+        <br></br>
+        <label>
+            <h2>Password:</h2>
+            <input type="password" name="password" required>
+        </label>
+        <p class="error">{{passworderror}}</p>
+        <br></br>
+        <label>
+            <h2>Verify Password:</h2>
+            <input type="password" name="verifypassword" required>
+        </label>
+        <p class="error">{{passworderror}}</p>
+        <br></br>
+        <input type="submit" value="SignUp"/>
+      </form>
+    </body>
+{% endblock %}
+</html>

@@ -3,13 +3,28 @@
 <html>
     <head>
         <title>{{title}}</title>
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
     </head>
 <body>
     <nav>
-        <!-- fix these links to navigate back to pages-->
-        <a href="blog">Main Blog Page</a>
-        <a href="newpost">Add Blog</a> |
+        <a style='padding: 20px;' href="/">Home</a>
+        <a style='padding: 20px;' href="/blog">All Posts</a>
+        <a style='padding: 20px;' href="/newpost">New Post</a> 
+        <a style='padding: 20px;' href="/login">Login</a>
+        <a style='padding: 20px;' href="/logout">Logout</a>
     </nav>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
+        </ul>
+    {% endwith %}
 
     {% block content %}
     {% endblock %}
