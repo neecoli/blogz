@@ -20,7 +20,7 @@
           <li><a href = "/blog">{{blog.title}}</a></li>
           -->
           <p>{{blog.body}}</p>
-          <p>written by <a href = "/blog?blog.owner={{blog.owner.id}}">{{blog.owner.username}}</a></p>
+          <p>written by <a href = "/blog?user={{blog.owner.id}}">{{blog.owner.username}}</a></p>
           {% endfor %}
         </ul>
     </body>

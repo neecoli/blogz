@@ -159,8 +159,6 @@ def display_mainblog():
         blog = Blog.query.get(blog_id)
             
         return render_template('individualblog.html', blogname=blog.title, blogentry=blog.body)
-
-
       
     if 'user' in request.args:
         user_id = request.args.get('user')
