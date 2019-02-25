@@ -203,11 +203,7 @@ def new_post():
     #blogowner = # take username from session here to get ID from db then thats the blogowner ID
     blogowner = User.query.filter_by(username=session['username']).first()
     #blogowner = User.query.filter_by(owner_id=user_id).first()
-
-    new_blog = Blog(blogname, blogentry, blogowner)
-    db.session.add(new_blog)
-    db.session.commit()
-    
+   
     titleerror = ''
     entryerror = ''
 
@@ -219,6 +215,9 @@ def new_post():
     
     if not titleerror and not entryerror:
         #after adding post, go to individual post page
+        new_blog = Blog(blogname, blogentry, blogowner)
+        db.session.add(new_blog)
+        db.session.commit()
         return render_template('individualblog.html', blogname=blogname, blogentry=blogentry)
         #return render_template('mainblog.html', blogs=blogs)
     else:
